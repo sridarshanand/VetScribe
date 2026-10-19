@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VetVoice</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand"><span class="logo">V</span><div><h1>VetVoice</h1><p>Speak or paste a visit note. Review the structured record. Save it.</p></div></div>
+    <nav><button id="tab-new" class="tab active">New record</button><button id="tab-records" class="tab">Saved records</button></nav>
+  </header>
+  <main>
+    <div id="alert" class="alert" hidden><span id="alert-text"></span><button onclick="hideAlert()">Dismiss</button></div>
+
+    <section id="new-view">
+      <section class="card">
+        <div class="card-head"><h2>1. Add the visit note</h2>
+          <select id="sample"><option value="">Try a sample note</option></select></div>
+        <div class="recorder">
+          <button id="record-btn" class="btn record"><span class="dot"></span> Record voice</button>
+          <button id="upload-btn" class="btn ghost">Upload audio file</button>
+          <input id="audio-file" type="file" accept="audio/*" hidden>
+          <label class="check"><input id="auto-extract" type="checkbox" checked> Extract fields right after transcribing</label>
+        </div>
+        <p id="record-status" class="hint" hidden></p>
+        <textarea id="note" rows="9" placeholder="Type or paste the visit note here, or record your voice."></textarea>
+        <div class="row-end">
+          <button id="clear-btn" class="btn ghost">Clear text</button>
+          <button id="extract-btn" class="btn primary">Extract fields</button>
+        </div>
+      </section>
+
+      <section id="form-card" class="card" hidden>
+        <div class="card-head"><h2>2. Review, edit and save</h2><span id="status-pill" class="pill draft">Draft</span></div>
+        <p class="hint">Empty fields were not mentioned in the note. Highlighted fields need review.</p>
+        <div id="flag-bar" class="flag-bar" hidden><strong id="flag-count"></strong><button id="confirm-all" class="btn small ghost">Mark all as correct</button></div>
+        <div id="fields"></div>
+        <details id="original-wrap" class="original" hidden><summary>Original note</summary><pre id="original-text"></pre></details>
+        <div class="actions">
+          <button id="reset-btn" class="btn ghost">Start new record</button>
+          <div class="spacer"></div>
+          <button id="save-draft" class="btn">Save draft</button>
+          <button id="save-validated" class="btn primary">Validate and save</button>
+        </div>
+      </section>
+    </section>
+
+    <section id="records-view" class="card" hidden>
+      <div class="card-head"><h2>Saved records</h2><input id="search" class="search" type="search" placeholder="Search name, owner, species, diagnosis"></div>
+      <div id="records-list" class="record-list"></div>
+    </section>
+  </main>
+  <footer>AI output can be wrong. A veterinarian must review every record before it is relied on.</footer>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>
