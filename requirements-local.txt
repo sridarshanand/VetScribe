@@ -1,0 +1,2 @@
+# Only needed for FREE OFFLINE speech-to-text (STT_PROVIDER=local)
+faster-whisper>=1.0.3
